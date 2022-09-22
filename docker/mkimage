@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+readonly DOCKER_IMAGE_NAME="$1"
+readonly DOCKER_FILE="$2"
+readonly DOCKER_VERSION="latest"
+
+readonly FROM_IMAGE_FOR_RUST=${FROM_IMAGE_FOR_RUST:-base:latest}
+
+docker build \
+  --file=${DOCKER_FILE} \
+  --tag=${DOCKER_IMAGE_NAME}:${DOCKER_VERSION} \
+  --build-arg=UBUNTU_VERSION="jammy" \
+  --build-arg=FROM_IMAGE_FOR_RUST="$FROM_IMAGE_FOR_RUST" \
+  . 1>&2

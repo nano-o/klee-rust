@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+(cd docker/base && ../mkimage klee-base)
+(cd docker/rust && ../mkimage klee-rust)
