@@ -91,4 +91,10 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; h
 ENV PATH=/home/user/bin:${PATH}
 ENV BAT_THEME=ansi
 
+# install current rust with rustup
+##################################
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+ENV PATH="/home/user/.cargo/bin:$PATH"
+
+
 WORKDIR /home/user/

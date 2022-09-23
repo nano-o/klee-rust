@@ -4,11 +4,25 @@ readonly DOCKER_IMAGE_NAME="$1"
 readonly DOCKER_FILE="$2"
 readonly DOCKER_VERSION="latest"
 
-readonly FROM_IMAGE_FOR_RUST=${FROM_IMAGE_FOR_RUST:-base:latest}
+readonly RUST_REPO_IMAGE=${RUST_REPO_IMAGE:-klee-rust-repo:latest}
+readonly KLEE_REPO_IMAGE=${KLEE_REPO_IMAGE:-klee-klee-repo:latest}
+readonly FROM_IMAGE_FOR_RUST=${FROM_IMAGE_FOR_RUST:-klee-base:latest}
+readonly FROM_IMAGE_FOR_RUST_LLVM_12=${FROM_IMAGE_FOR_RUST_LLVM_12:-klee-base:latest}
+readonly FROM_IMAGE_FOR_KLEE=${FROM_IMAGE_FOR_KLEE:-klee-rust:latest}
+readonly FROM_IMAGE_FOR_KLEE_LLVM_12=${FROM_IMAGE_FOR_KLEE_LLVM_12:-klee-rust-llvm-12:latest}
+readonly FROM_IMAGE_FOR_SOROBAN=${FROM_IMAGE_FOR_SOROBAN:-klee-rust:latest}
+readonly KLEE_IMAGE=${KLEE_IMAGE:-klee-klee:latest}
 
 docker build \
   --file=${DOCKER_FILE} \
   --tag=${DOCKER_IMAGE_NAME}:${DOCKER_VERSION} \
   --build-arg=UBUNTU_VERSION="jammy" \
+  --build-arg=RUST_REPO_IMAGE="$RUST_REPO_IMAGE" \
+  --build-arg=KLEE_REPO_IMAGE="$KLEE_REPO_IMAGE" \
   --build-arg=FROM_IMAGE_FOR_RUST="$FROM_IMAGE_FOR_RUST" \
+  --build-arg=FROM_IMAGE_FOR_RUST_LLVM_12="$FROM_IMAGE_FOR_RUST_LLVM_12" \
+  --build-arg=FROM_IMAGE_FOR_KLEE="$FROM_IMAGE_FOR_KLEE" \
+  --build-arg=FROM_IMAGE_FOR_KLEE_LLVM_12="$FROM_IMAGE_FOR_KLEE_LLVM_12" \
+  --build-arg=FROM_IMAGE_FOR_SOROBAN="$FROM_IMAGE_FOR_SOROBAN" \
+  --build-arg=KLEE_IMAGE="$KLEE_IMAGE" \
   . 1>&2

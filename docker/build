@@ -2,5 +2,11 @@
 
 set -e
 
+(cd docker/rust-repo && ../mkimage klee-rust-repo)
 (cd docker/base && ../mkimage klee-base)
-(cd docker/rust && ../mkimage klee-rust)
+(cd docker/rust && ../mkimage klee-rust-llvm-13)
+(cd docker/rust-llvm-12 && ../mkimage klee-rust-llvm-12)
+(cd docker/klee-repo && ../mkimage klee-klee-repo)
+(cd docker/klee && ../mkimage klee-klee)
+(cd docker/klee-llvm-12 && ../mkimage klee-klee-llvm-12)
+# (cd docker/soroban && ../mkimage klee-soroban)

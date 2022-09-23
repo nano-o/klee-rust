@@ -9,15 +9,15 @@ USER user
 RUN mkdir /home/user/rust
 COPY --from=rust-repo /home/user/rust /home/user/rust/
 
-# clone rust and setup with LLVM 13
+# clone rust and setup with LLVM 12
 ###################################
 
 WORKDIR rust
-RUN git submodule set-branch -b "rustc/13.0-2021-09-30" "src/llvm-project"
-RUN cd src/llvm-project && git switch "rustc/13.0-2021-09-30"
+RUN git submodule set-branch -b "rustc/12.0-2021-07-10" "src/llvm-project"
+RUN cd src/llvm-project && git switch "rustc/12.0-2021-07-10"
 RUN git config user.name 'NA'
 RUN git config user.email '<>'
-RUN git commit -a -m "use LLVM 13"
+RUN git commit -a -m "use LLVM 12"
 RUN git submodule update --recursive
 
 # build rust
